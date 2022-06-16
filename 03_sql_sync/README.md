@@ -1,19 +1,4 @@
-# SQLAlchemy
-
-## Arquitetura
-
-- DB API - Baseada no PEP 249 do Python
-- SQLAlchemy Core
-  - Schema / Types
-  - SQL Expression Language
-  - Engine
-  - Connection Pooling
-  - Dialect
-- SQLAlchemy ORM
-
-## Estrutura de um projeto
-
-### db_session
+## db_session
 
 - import sqlalchemy as sa
   - sqlachemy em si
@@ -25,6 +10,7 @@
 - from typing import Optional
   - Tipagem de dados opcionais
 - from sqlalchemy.future.engine import Engine
+
   - Engine: utilizados para criar instâncias deste tipo.
 
-from model_base import ModelBase
+- from model_base import ModelBase
