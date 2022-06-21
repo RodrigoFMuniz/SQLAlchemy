@@ -20,3 +20,7 @@ def create_engine(sqlite: bool = True):
     __engine = sa.create_engine(url=conn_str,echo=False,connect_args ={"check_same_thread":False})
   else:
     conn_str = 'postgresql:///user:password@localhost:5432/picoles'
+    __engine = sa.create_engine(url=conn_str,echo=False)
+  
+  return __engine
+  
