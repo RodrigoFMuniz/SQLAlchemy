@@ -1,4 +1,0 @@
-colorama==0.4.4
-greenlet==1.1.2
-SQLAlchemy==1.4.37
-tqdm==4.64.0
