@@ -8,7 +8,9 @@ from models.model_base import ModelBase
 
 __engine: Optional[Engine] = None
 
-def create_engine(sqlite: bool = True):
+
+# Inicializa a conexão com o banco de dados 
+def create_engine(sqlite: bool = False) -> Engine:
   global __engine
   if __engine:
     return
@@ -23,4 +25,19 @@ def create_engine(sqlite: bool = True):
     __engine = sa.create_engine(url=conn_str,echo=False)
   
   return __engine
+
+#Cria a sessão do banco de dados, inicializando a engine
+def create_session() -> Session:
+  global __engine
+  if not __engine:
+    create_engine(sqlite=True) #True pq estamos usando sqlite
+  
+  __session = sessionmaker(__engine,expire_on_commit=False,class_= Session)
+
+  session: Session = __session()
+
+  return session
+
+
+
   
