@@ -9,7 +9,7 @@ from models.model_base import ModelBase
 __engine: Optional[Engine] = None
 
 
-# Inicializa a conexão com o banco de dados 
+'''Função para configuração a conexão com o banco de dados''' 
 def create_engine(sqlite: bool = False) -> Engine:
   global __engine
   if __engine:
@@ -26,7 +26,7 @@ def create_engine(sqlite: bool = False) -> Engine:
   
   return __engine
 
-#Cria a sessão do banco de dados, inicializando a engine
+'''Cria a sessão do banco de dados, inicializando a engine'''
 def create_session() -> Session:
   global __engine
   if not __engine:
