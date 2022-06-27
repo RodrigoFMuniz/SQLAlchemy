@@ -8,3 +8,11 @@ from sqlalchemy.future.engine import Engine
 from models.model_base import ModelBase
 
 __engine: Optional[Engine] = None
+
+def create_engine(sqlite:bool = True):
+    global __engine
+
+    if __engine:
+        return
+    if sqlite:
+        arquivo_db = 'db/picoles.sqlite'
