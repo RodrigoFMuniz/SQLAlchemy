@@ -29,7 +29,7 @@ __engine: Optional[Engine] = None
  connect_args: checagem de threads
 '''
 
-def create_engine(sqlite:bool = False):
+def create_engine(sqlite:bool = False)-> Engine:
   global __engine 
   if __engine:
     return
