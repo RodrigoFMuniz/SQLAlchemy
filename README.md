@@ -98,4 +98,15 @@
     def create_tables()->None:
       global __engine
       if not __engine:
-        create_engine()
+        create_engine(sqlite=True)
+      import models.__all_models
+      ModelBase.metadata.drop_all(__engine)
+      ModelBase.metadata.create_all(__engine)
+
+## Estrutura create_main
+> Inicia o banco de dados, baseado na estrura db_session
+
+    from conf.db_session import create_tables
+
+    if __name__ == "__main__":
+      create_tables()
