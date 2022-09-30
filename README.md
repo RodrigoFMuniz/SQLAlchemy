@@ -24,6 +24,7 @@
 
 > - create_engine() define a configuração de conexão do SQLAlchemy com o banco de dados
 > - create_session() Cria a conexão com banco de dados em si
+> - create_tables() Cria as tabelas no banco de dados
 
     '''
     session maker: Cria a sessão
@@ -88,3 +89,13 @@
 
       session: Session = __session
       return session
+
+    
+    '''
+    Cria as tabelas no banco de dados
+    '''
+
+    def create_tables()->None:
+      global __engine
+      if not __engine:
+        create_engine()

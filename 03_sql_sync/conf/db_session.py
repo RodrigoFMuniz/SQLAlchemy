@@ -61,3 +61,16 @@ def create_session()-> Session:
 
   session: Session = __session
   return session
+
+'''
+Cria as tabelas no banco de dados
+'''
+
+def create_tables()->None:
+  global __engine
+  if not __engine:
+    create_engine()
+  
+  import models.__all_models
+  ModelBase.metadata.drop_all(__engine)
+  ModelBase.metadata.create_all(__engine)
