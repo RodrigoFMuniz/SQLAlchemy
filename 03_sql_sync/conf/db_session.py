@@ -45,3 +45,19 @@ def create_engine(sqlite:bool = False)-> Engine:
   
   return __engine
 
+  '''
+  session: cria uma sessão que usará a máquina configurada de db 
+  create_engine(sqlite=True): Cria uma máquina configurada para conexão sqlite de DB
+  __engine: Variavel para armazenamento das configurações do banco de dados
+  expire_on_commit=False: Não expira a cada commit, ou cada inserção no DB
+  class_=Session: Classe usada para definir o modelo de classe para criar uma nova sessão/conexão
+  '''
+
+def create_session()-> Session:
+  global __engine
+  if not __engine:
+    create_engine(sqlite=True)
+  __session = sessionmaker(__engine, expire_on_commit=False, class_=Session)
+
+  session: Session = __session
+  return session
