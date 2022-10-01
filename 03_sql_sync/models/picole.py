@@ -2,9 +2,16 @@ import sqlalchemy as sa
 from datetime import datetime
 from models.model_base import ModelBase
 import sqlalchemy.orm as orm
+
+from typing import List, Optional
+
 from models.sabor import Sabor
 from models.tipo_embalagem import TipoEmbalagem
 from models.tipo_picole import TipoPicole
+
+from models.ingrediente import Ingrediente
+from models.conservante import Conservante
+from models.aditivo_nutritivo import AditivoNutritivo
 
 #Construção da tabela auxiliar para configuração de relacionamento N:M
 
@@ -46,7 +53,11 @@ class Picole(ModelBase):
   tipos_embalagem: TipoEmbalagem = orm.relationship('TipoEmbalagem', lazy='joined')
 
   #Relacionamento N:M
+  ingredientes: List[Ingrediente] = orm.relationship('Ingrediente', secondary='ingredientes_picole', backref='ingrediente', lazy="joined")
 
+  conservantes: Optional[List[Conservante]] = orm.relationship('Conservante', secondary="conservantes_picoles", backref="conservante", lazy="joined")
+  
+  aditivo_nutritivo = Optional[List[AditivoNutritivo]] = orm.relationship('AditivoNutritivo', secondary="aditivos_nutritivos_picole", backref="aditivo_nutritivo", lazy="joined")
 
   def __repr__(self)->str:
     return f'<Picolé: {self.tipo_picole.nome} com sabor {self.sabor.nome} e preço {self.nome}'
