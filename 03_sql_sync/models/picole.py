@@ -22,6 +22,13 @@ conservantes_picoles = sa.Table(
   sa.Column('id_conservante',sa.Integer,sa.ForeignKey('conservantes.id'))
 )
 
+aditivos_nutritivos_picole = sa.Table(
+  'aditivos_nutritivos_picole',
+  ModelBase.metadata,
+  sa.Column('id_picole',sa.Integer,sa.ForeignKey('picoles.id')),
+  sa.Column('id_aditivo_nutritivo',sa.Integer,sa.ForeignKey('aditivos_nutritivos.id'))
+)
+
 class Picole(ModelBase):
   __tablename__:str = 'picoles'
   id: int = sa.Column(sa.BigInteger,primary_key=True, autoincrement=True)
