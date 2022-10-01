@@ -22,8 +22,8 @@ ingredientes_picole = sa.Table(
   sa.Column('id_ingrediente',sa.Integer,sa.ForeignKey('ingredientes.id'))
 )
 
-conservantes_picoles = sa.Table(
-  'conservantes_picoles',
+conservantes_picole = sa.Table(
+  'conservantes_picole',
   ModelBase.metadata,
   sa.Column('id_picole',sa.Integer,sa.ForeignKey('picoles.id')),
   sa.Column('id_conservante',sa.Integer,sa.ForeignKey('conservantes.id'))
@@ -49,15 +49,15 @@ class Picole(ModelBase):
   id_tipo_picole: int = sa.Column(sa.String, sa.ForeignKey('tipos_picole.id'))
   tipos_picole:TipoPicole = orm.relationship('TipoPicole', lazy='joined')
 
-  id_tipo_embalagem: int = sa.Column(sa.String, sa.ForeignKey('tipos_embalagem.id'))
+  id_tipo_embalagem: int = sa.Column(sa.String, sa.ForeignKey('tipos_embalagens.id'))
   tipos_embalagem: TipoEmbalagem = orm.relationship('TipoEmbalagem', lazy='joined')
 
   #Relacionamento N:M
   ingredientes: List[Ingrediente] = orm.relationship('Ingrediente', secondary='ingredientes_picole', backref='ingrediente', lazy="joined")
 
-  conservantes: Optional[List[Conservante]] = orm.relationship('Conservante', secondary="conservantes_picoles", backref="conservante", lazy="joined")
+  conservantes: Optional[List[Conservante]] = orm.relationship('Conservante', secondary="conservantes_picole", backref="conservante", lazy="joined")
   
-  aditivo_nutritivo = Optional[List[AditivoNutritivo]] = orm.relationship('AditivoNutritivo', secondary="aditivos_nutritivos_picole", backref="aditivo_nutritivo", lazy="joined")
+  aditivo_nutritivo: Optional[List[AditivoNutritivo]] = orm.relationship('AditivoNutritivo', secondary="aditivos_nutritivos_picole", backref="aditivo_nutritivo", lazy="joined")
 
   def __repr__(self)->str:
     return f'<Picolé: {self.tipo_picole.nome} com sabor {self.sabor.nome} e preço {self.nome}'
