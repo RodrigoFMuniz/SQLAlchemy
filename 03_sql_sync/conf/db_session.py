@@ -53,13 +53,13 @@ def create_engine(sqlite:bool = False)-> Engine:
   class_=Session: Classe usada para definir o modelo de classe para criar uma nova sessão/conexão
   '''
 
-def create_session()-> Session:
+def create_session() -> Session:
   global __engine
   if not __engine:
     create_engine(sqlite=True)
   __session = sessionmaker(__engine, expire_on_commit=False, class_=Session)
 
-  session: Session = __session
+  session: Session = __session()
   return session
 
 '''
