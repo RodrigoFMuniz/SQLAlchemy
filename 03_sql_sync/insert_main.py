@@ -5,6 +5,7 @@ from models.aditivo_nutritivo import AditivoNutritivo
 from models.sabor import Sabor
 from models.conservante import Conservante
 from models.ingrediente import Ingrediente
+from models.revendedor import Revendedor
 
 def insert_aditivo_nutritivo()->None:
     print("Cadastrando aditivo nutritivo")
@@ -72,9 +73,28 @@ def insert_ingrediente()->None:
     print(f"Data de criação:{ingrediente.data_criacao}")
     print(f"Nome:{ingrediente.nome}")
     
+def insert_revendedor()->None:
+    print("Cadastrando revendedor")
+    cnpj:str = input('Informe o cnpj:')
+    razao_social:str = input('Informe a razão social:')
+    contato:str = input('Informe o contato:')
+
+    revendedor: Revendedor = Revendedor(cnpj=cnpj, razao_social=razao_social,contato=contato)
+
+    with create_session() as session:
+        session.add(revendedor)
+        session.commit()
+    
+    print('Revendedor cadastrado com sucesso.')
+    print(f"ID:{revendedor.id}")
+    print(f"Data de criação:{revendedor.data_criacao}")
+    print(f"CNPJ:{revendedor.cnpj}")
+    print(f"Razão social:{revendedor.razao_social}")
+    print(f"Contato:{revendedor.contato}")
 
 if __name__ == "__main__":
     # insert_aditivo_nutritivo()
     # insert_sabor()
     # insert_conservante()
-    insert_ingrediente()
+    # insert_ingrediente()
+    insert_revendedor()
