@@ -6,6 +6,7 @@ from models.sabor import Sabor
 from models.conservante import Conservante
 from models.ingrediente import Ingrediente
 from models.revendedor import Revendedor
+from models.tipo_embalagem import TipoEmbalagem
 
 def insert_aditivo_nutritivo()->None:
     print("Cadastrando aditivo nutritivo")
@@ -92,9 +93,25 @@ def insert_revendedor()->None:
     print(f"Razão social:{revendedor.razao_social}")
     print(f"Contato:{revendedor.contato}")
 
+def insert_tipo_embalagem()->None:
+    print("Cadastrando tipo de embalagem")
+    nome:str = input('Informe o tipo:')
+
+    tipo_embalagem: TipoEmbalagem = TipoEmbalagem(nome=nome)
+
+    with create_session() as session:
+        session.add(tipo_embalagem)
+        session.commit()
+    
+    print('Tipo de embalagem cadastrado com sucesso.')
+    print(f"ID:{tipo_embalagem.id}")
+    print(f"Data de criação:{tipo_embalagem.data_criacao}")
+    print(f"Nome:{tipo_embalagem.nome}")
+
 if __name__ == "__main__":
     # insert_aditivo_nutritivo()
     # insert_sabor()
     # insert_conservante()
     # insert_ingrediente()
-    insert_revendedor()
+    # insert_revendedor()
+    insert_tipo_embalagem()
