@@ -8,4 +8,3 @@ from models.revendedor import Revendedor
 from models.sabor import Sabor
 from models.tipo_embalagem import TipoEmbalagem
 from models.tipo_picole import TipoPicole
-

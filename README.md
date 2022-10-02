@@ -13,14 +13,15 @@
 
 ## Estrutura de um projeto
 
-## Estrutura model_base
+### Estrutura model_base
+
 > Instacia um objeto Sql alchemy para ser usado no desenvolvimento do projeto
 
     from sqlalchemy.ext.declarative import declarative_base
 
     ModelBase = declarative_base()
 
-## Estrutura db_session
+### Estrutura db_session
 
 > - create_engine() define a configuração de conexão do SQLAlchemy com o banco de dados
 > - create_session() Cria a conexão com banco de dados em si
@@ -46,7 +47,7 @@
 
     '''
     .parent: Define que o diretório subirá um nível em relação ao atual
-    mkdir : cria um diretório 
+    mkdir : cria um diretório
     parents: Respeita o local de criação do arquivo
     exist_ok: Se existir mantém, se não existir cria um novo arquivo.
     global: diz a função que a variável criada trata-se da variavel gloobal e não de escopo local.
@@ -58,7 +59,7 @@
     '''
 
     def create_engine(sqlite:bool = False)-> Engine:
-      global __engine 
+      global __engine
       if __engine:
         return
       if sqlite:
@@ -70,11 +71,11 @@
       else:
         conn_str = "postgreesql://user_postgre_db:password@localhost:port_db/bd_name"
         __engine = sa.create_engine(url=conn_str, echo=False)
-      
+
       return __engine
 
       '''
-      session: cria uma sessão que usará a máquina configurada de db 
+      session: cria uma sessão que usará a máquina configurada de db
       create_engine(sqlite=True): Cria uma máquina configurada para conexão sqlite de DB
       __engine: Variavel para armazenamento das configurações do banco de dados
       expire_on_commit=False: Não expira a cada commit, ou cada inserção no DB
@@ -90,7 +91,7 @@
       session: Session = __session
       return session
 
-    
+
     '''
     Cria as tabelas no banco de dados
     '''
@@ -103,10 +104,15 @@
       ModelBase.metadata.drop_all(__engine)
       ModelBase.metadata.create_all(__engine)
 
-## Estrutura create_main
+### Estrutura create_main
+
 > Inicia o banco de dados, baseado na estrura db_session
 
     from conf.db_session import create_tables
 
     if __name__ == "__main__":
       create_tables()
+
+### Estrutura \_\_all_models
+
+> - Local de importação de todos os models/schemas produzidos no DB
