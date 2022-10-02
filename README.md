@@ -127,3 +127,8 @@
 > - `from models.sabor import Sabor`
 > - `from models.tipo_embalagem import TipoEmbalagem`
 > - `from models.tipo_picole import TipoPicole`
+
+## Padrão Unity of Work
+
+> - Toda query que for executada antes do commit, será enviada em mesmo batch(pacote) para o banco de dados
+> - Se alguma query(requisição) for executa após o commit, esta nova requisição só terá valor após um novo commit.
