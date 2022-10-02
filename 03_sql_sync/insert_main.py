@@ -4,6 +4,7 @@ from conf.db_session import create_session
 from models.aditivo_nutritivo import AditivoNutritivo
 from models.sabor import Sabor
 from models.conservante import Conservante
+from models.ingrediente import Ingrediente
 
 def insert_aditivo_nutritivo()->None:
     print("Cadastrando aditivo nutritivo")
@@ -56,7 +57,24 @@ def insert_conservante()->None:
     print(f"Nome:{conservante.nome}")
     print(f"Descrição:{conservante.descricao}")
 
+def insert_ingrediente()->None:
+    print("Cadastrando ingrediente")
+    nome:str = input('Informe o ingrediente:')
+
+    ingrediente: Ingrediente = Ingrediente(nome=nome)
+
+    with create_session() as session:
+        session.add(ingrediente)
+        session.commit()
+    
+    print('Ingrediente cadastrado com sucesso.')
+    print(f"ID:{ingrediente.id}")
+    print(f"Data de criação:{ingrediente.data_criacao}")
+    print(f"Nome:{ingrediente.nome}")
+    
+
 if __name__ == "__main__":
     # insert_aditivo_nutritivo()
     # insert_sabor()
-    insert_conservante()
+    # insert_conservante()
+    insert_ingrediente()
