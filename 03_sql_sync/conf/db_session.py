@@ -64,6 +64,7 @@ def create_session()-> Session:
 
 '''
 Cria as tabelas no banco de dados
+_all_models: usado para importar todas as tabelas cridas
 '''
 
 def create_tables()->None:
