@@ -131,4 +131,4 @@
 ## Padrão Unity of Work
 
 > - Toda query que for executada antes do commit, será enviada em mesmo batch(pacote) para o banco de dados
-> - Se alguma query(requisição) for executa após o commit, esta nova requisição só terá valor após um novo commit.
+> - Se alguma query(requisição) for executa após o commit, esta nova requisição só terá valor após um novo commit, ou seja, só será enviada aobanco de dados após um novo commit, até lá, não terá efeito.
