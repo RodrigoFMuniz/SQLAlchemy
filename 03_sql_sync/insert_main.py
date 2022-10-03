@@ -8,6 +8,7 @@ from models.ingrediente import Ingrediente
 from models.revendedor import Revendedor
 from models.tipo_embalagem import TipoEmbalagem
 from models.tipo_picole import TipoPicole
+from models.lote import Lote
 
 def insert_aditivo_nutritivo()->None:
     print("Cadastrando aditivo nutritivo")
@@ -124,6 +125,23 @@ def insert_tipo_picole()->None:
     print(f"Data de criação:{tipo_picole.data_criacao}")
     print(f"Nome:{tipo_picole.nome}")
 
+def insert_lote()->Lote:
+    print("Cadastrando lote")
+    id_tipo_picole:int = int(input('Informe o tipo:'))
+    qtd:int = int(input('Informe a qtd:'))
+
+    lote: Lote = Lote(id_tipo_picole=id_tipo_picole, qtd=qtd)
+
+    with create_session() as session:
+        session.add(lote)
+        session.commit()
+    
+    return lote
+    
+    # print('Tipo de embalagem cadastrado com sucesso.')
+    # print(f"ID:{tipo_picole.id}")
+    # print(f"Data de criação:{tipo_picole.data_criacao}")
+    # print(f"Nome:{tipo_picole.nome}")
 
 if __name__ == "__main__":
     # insert_aditivo_nutritivo()
@@ -132,4 +150,10 @@ if __name__ == "__main__":
     # insert_ingrediente()
     # insert_revendedor()
     # insert_tipo_embalagem()
-    insert_tipo_picole()
+    # insert_tipo_picole()
+    lote = insert_lote()
+
+    print(f"ID:{lote.id}")
+    print(f"Data de criação:{lote.data_criacao}")
+    print(f"Tipo:{lote.id_tipo_picole}")
+    print(f"Qtd:{lote.qtd}")
