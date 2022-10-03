@@ -11,8 +11,9 @@ from models.tipo_embalagem import TipoEmbalagem
 from models.tipo_picole import TipoPicole
 from models.lote import Lote
 from models.nota_fiscal import NotaFiscal
+from models.picole import Picole
 
-def insert_aditivo_nutritivo()->None:
+def insert_aditivo_nutritivo()->AditivoNutritivo:
     print("Cadastrando aditivo nutritivo")
     nome:str = input('Informe aditivo nutritivo:')
     formula_quimica: str = input("Informe a formula química: ")
@@ -30,6 +31,8 @@ def insert_aditivo_nutritivo()->None:
     print(f"Nome:{an.nome}")
     print(f"Formula química:{an.formula_quimica}")
 
+    return an
+
 def insert_sabor()->None:
     print("Cadastrando sabor")
     nome:str = input('Informe sabor:')
@@ -46,7 +49,7 @@ def insert_sabor()->None:
     print(f"Data de criação:{sabor.data_criacao}")
     print(f"Nome:{sabor.nome}")
 
-def insert_conservante()->None:
+def insert_conservante()->Conservante:
     print("Cadastrando conservante")
     nome:str = input('Informe conservante:')
     descricao:str = input('Descreva o conservante:')
@@ -63,7 +66,9 @@ def insert_conservante()->None:
     print(f"Nome:{conservante.nome}")
     print(f"Descrição:{conservante.descricao}")
 
-def insert_ingrediente()->None:
+    return conservante
+
+def insert_ingrediente()->Ingrediente:
     print("Cadastrando ingrediente")
     nome:str = input('Informe o ingrediente:')
 
@@ -77,6 +82,8 @@ def insert_ingrediente()->None:
     print(f"ID:{ingrediente.id}")
     print(f"Data de criação:{ingrediente.data_criacao}")
     print(f"Nome:{ingrediente.nome}")
+
+    return ingrediente
     
 def insert_revendedor()->None:
     print("Cadastrando revendedor")
@@ -97,7 +104,7 @@ def insert_revendedor()->None:
     print(f"Razão social:{revendedor.razao_social}")
     print(f"Contato:{revendedor.contato}")
 
-def insert_tipo_embalagem()->None:
+def insert_tipo_embalagem()->TipoEmbalagem:
     print("Cadastrando tipo de embalagem")
     nome:str = input('Informe o tipo:')
 
@@ -112,7 +119,9 @@ def insert_tipo_embalagem()->None:
     print(f"Data de criação:{tipo_embalagem.data_criacao}")
     print(f"Nome:{tipo_embalagem.nome}")
 
-def insert_tipo_picole()->None:
+    return tipo_embalagem
+
+def insert_tipo_picole()->TipoPicole:
     print("Cadastrando tipo de picolé")
     nome:str = input('Informe o tipo:')
 
@@ -126,6 +135,8 @@ def insert_tipo_picole()->None:
     print(f"ID:{tipo_picole.id}")
     print(f"Data de criação:{tipo_picole.data_criacao}")
     print(f"Nome:{tipo_picole.nome}")
+
+    return tipo_picole
 
 def insert_lote()->Lote:
     print("Cadastrando lote")
@@ -171,12 +182,50 @@ def insert_nota_fiscal()->NotaFiscal:
     return nf
 
 
+def insert_picoles()->Picole:
+    print('Cadastrar um picolé')
+    preco: float = input('Digite o preço: ')
+    id_sabor: int = input('Sabor: ')
+    id_tipo_picole: int = input('Tipo Picole: ')
+    id_tipo_embalagem: int = input('Tipo embalagem: ')
 
+    ing:Ingrediente = insert_ingrediente()
+    cons: Conservante = insert_conservante()
+    an: AditivoNutritivo = insert_aditivo_nutritivo()
+
+    picole: Picole = Picole(preco=preco, id_sabor = id_sabor,id_tipo_picole=id_tipo_picole,id_tipo_embalagem=id_tipo_embalagem)
+
+    picole.ingredientes.append(ing)
+
+    if cons:
+        picole.conservantes.append(cons)
+
+    if an:
+        picole.aditivo_nutritivo.append(an)
     
-    # print('Tipo de embalagem cadastrado com sucesso.')
-    # print(f"ID:{tipo_picole.id}")
-    # print(f"Data de criação:{tipo_picole.data_criacao}")
-    # print(f"Nome:{tipo_picole.nome}")
+    with create_session() as session:
+        session.add(picole)
+
+        session.commit()
+
+        print(f"ID:{picole.id}")
+        print(f"Data de criação:{picole.data_criacao}")
+        print(f"Preço:{picole.preco}")
+        print(f"Sabor:{picole.sabor.nome}")
+        print(f"Tipo de picolé:{picole.tipos_picole.nome}")
+        print(f"Tipo de embalagem:{picole.tipos_embalagem.nome}")
+        for i in picole.ingredientes:
+            print(f"Ingrediente: {i.id} -> {i.nome}")
+        if len(picole.conservantes) > 0:
+            for c in picole.conservantes:
+                print(f"Conservante: {c.id} -> {c.nome}")
+        if len(picole.aditivo_nutritivo) > 0:
+            for a in picole.aditivo_nutritivo:
+                print(f"Aditivo: {a.id} -> {a.nome}")
+        
+    return picole
+
+
 
 if __name__ == "__main__":
     # insert_aditivo_nutritivo()
@@ -193,7 +242,8 @@ if __name__ == "__main__":
     # print(f"Tipo:{lote.id_tipo_picole}")
     # print(f"Qtd:{lote.qtd}")
 
-    nf = insert_nota_fiscal()
+    # insert_nota_fiscal()
+    insert_picoles()
 
 
 
