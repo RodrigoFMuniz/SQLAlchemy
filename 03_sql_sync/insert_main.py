@@ -1,4 +1,5 @@
 from pydoc import describe
+from xml.dom.minidom import Notation
 from conf.db_session import create_session
 
 from models.aditivo_nutritivo import AditivoNutritivo
@@ -9,6 +10,7 @@ from models.revendedor import Revendedor
 from models.tipo_embalagem import TipoEmbalagem
 from models.tipo_picole import TipoPicole
 from models.lote import Lote
+from models.nota_fiscal import NotaFiscal
 
 def insert_aditivo_nutritivo()->None:
     print("Cadastrando aditivo nutritivo")
@@ -137,6 +139,39 @@ def insert_lote()->Lote:
         session.commit()
     
     return lote
+
+def insert_nota_fiscal()->NotaFiscal:
+    print('Cadastrar uma nota fiscal')
+    valor: float = input('Digite o valor da NF: ')
+    n_serie: str = input('Digite o número da NF: ')
+    descricao: str = input('Descreva os itens: ')
+    id_rev: int = input('Código revendedor: ')
+
+    lote_1: Lote = insert_lote()
+    lote_2: Lote = insert_lote()
+
+    nf: NotaFiscal = NotaFiscal(valor=valor, numero_serie=n_serie, descricao=descricao, id_revendedor=id_rev)
+
+    nf.lotes.append(lote_1)
+    nf.lotes.append(lote_2)
+
+    with create_session() as session:
+        session.add(nf)
+        session.commit()
+
+        print(f"ID:{nf.id}")
+        print(f"Data de criação:{nf.data_criacao}")
+        print(f"Valor:{nf.valor}")
+        print(f"SN:{nf.numero_serie}")
+        print(f"Decrição:{nf.descricao}")
+        print(f"Revendedor:{nf.revendedor.razao_social}")
+        for ind,l in enumerate(nf.lotes):
+            print(f"{ind} -> {l.tipo_picole.nome}")
+
+    return nf
+
+
+
     
     # print('Tipo de embalagem cadastrado com sucesso.')
     # print(f"ID:{tipo_picole.id}")
@@ -151,9 +186,14 @@ if __name__ == "__main__":
     # insert_revendedor()
     # insert_tipo_embalagem()
     # insert_tipo_picole()
-    lote = insert_lote()
+    # lote = insert_lote()
 
-    print(f"ID:{lote.id}")
-    print(f"Data de criação:{lote.data_criacao}")
-    print(f"Tipo:{lote.id_tipo_picole}")
-    print(f"Qtd:{lote.qtd}")
+    # print(f"ID:{lote.id}")
+    # print(f"Data de criação:{lote.data_criacao}")
+    # print(f"Tipo:{lote.id_tipo_picole}")
+    # print(f"Qtd:{lote.qtd}")
+
+    nf = insert_nota_fiscal()
+
+
+
