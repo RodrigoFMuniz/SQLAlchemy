@@ -160,9 +160,9 @@ def populate_lote():
     cor = gerar_cor()
     for n in tqdm(range(1, 101), desc='Cadastrando...', colour=cor):
         id_tipo_picole: int = gerar_int()
-        quantidade: int = gerar_int()
+        qtd: int = gerar_int()
 
-        lote: Lote = Lote(id_tipo_picole=id_tipo_picole, quantidade=quantidade)
+        lote: Lote = Lote(id_tipo_picole=id_tipo_picole, qtd=qtd)
         session.add(lote)
         sleep(0.05)
         
@@ -193,7 +193,7 @@ def populate_nota_fiscal():
     print('Notas Fiscais cadastradas com sucesso')
 
 
-#10) Piole
+#10) Picole
 def populate_picole():
     print(f'Cadastrando Picolés: ')
 
@@ -221,7 +221,7 @@ def populate_picole():
                 nome: str = gerar_string()
                 formula_quimica: str = gerar_string(frase=True)
                 aditivo_nutritivo: AditivoNutritivo = AditivoNutritivo(nome=nome, formula_quimica=formula_quimica)
-                picole.aditivos_nutritivos.append(aditivo_nutritivo)
+                picole.aditivo_nutritivo.append(aditivo_nutritivo)
         else:
             for _ in range(3):
                 # Conservantes
