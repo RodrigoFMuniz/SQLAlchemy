@@ -45,11 +45,22 @@ def select_ingrediente()->None:
             print(f"ID: {ing.id}")
             print(f"Data: {formata_data(ing.data_criacao)}")
             print(f"Nome: {ing.nome}")
+
+def select_conservante()->None:
+    with create_session() as session:
+        conservante: List[md.Conservante] = session.query(md.Conservante)
+
+        for c in conservante:
+            print(f"ID: {c.id}")
+            print(f"Data: {formata_data(c.data_criacao)}")
+            print(f"Nome: {c.nome}")
+            print(f"Descrição: {c.descricao}")
         
 
 if __name__ == "__main__":
     # select_aditivos_nutritivos()
     # select_sabor()
     # select_revendedor()
-    select_ingrediente()
+    # select_ingrediente()
+    select_conservante()
     
