@@ -1,6 +1,7 @@
 from types import NoneType
 from typing import List
 from sqlalchemy import func
+import sqlalchemy as sa
 from conf.helpers import formata_data
 from conf.db_session import create_session
 
@@ -84,15 +85,19 @@ def select_sabor_filtrado(id_sabor: int) ->None:
         # sabor_first: md.Sabor = session.query(md.Sabor).filter(md.Sabor.id == id_sabor).first()
         #forma 2
         sabor_first: md.Sabor = session.query(md.Sabor).filter(md.Sabor.id == id_sabor).one_or_none()
-        
-        if sabor_first != None:
+        # Forma 3
+        # sabor_first: md.Sabor = session.query(md.Sabor).filter(md.Sabor.id == id_sabor).one()
+
+
+        if sabor_first:
             print(f"Sabor filtrado ID: {sabor_first.id}")
             print(f"Sabor filtrado Nome: {sabor_first.nome}")
             print(f"Sabor filtrado Data: {formata_data(sabor_first.data_criacao)}")
-            
+        
         else:
-            print('Erro')
-            
+            # raise Exception('Error de tipo')
+            print('Error de tipo')
+
              
     
         
