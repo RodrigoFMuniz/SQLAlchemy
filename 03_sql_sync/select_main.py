@@ -75,6 +75,15 @@ def select_tipo_picole()->None:
             print(f"Data: {formata_data(tp.data_criacao)}")
             print(f"Nome: {tp.nome}")
 
+# Queries com filtro
+
+def select_sabor_filtrado(id_sabor: int) ->None:
+    with create_session() as session:
+        sabor_first: md.Sabor = session.query(md.Sabor).filter(md.Sabor.id == id_sabor).first()
+
+        print(f"Sabor filtrado ID: {sabor_first.id}")
+        print(f"Sabor filtrado Nome: {sabor_first.nome}")
+        print(f"Sabor filtrado Data: {formata_data(sabor_first.data_criacao)}")
         
 
 if __name__ == "__main__":
@@ -84,6 +93,6 @@ if __name__ == "__main__":
     # select_ingrediente()
     # select_conservante()
     # select_tipo_embalagem()
-    select_tipo_picole()
-
+    # select_tipo_picole()
+    select_sabor_filtrado(id_sabor=23)
     
