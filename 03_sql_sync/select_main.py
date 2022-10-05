@@ -26,9 +26,20 @@ def select_sabor()->None:
             print(f"Data: {formata_data(sa.data_criacao)}")
             print(f"Nome: {sa.nome}")
             
+def select_revendedor()->None:
+    with create_session() as session:
+        revendedor: List[md.Revendedor] = session.query(md.Revendedor)
+
+        for rev in revendedor:
+            print(f"ID: {rev.id}")
+            print(f"Data: {formata_data(rev.data_criacao)}")
+            print(f"CNPJ: {rev.cnpj}")
+            print(f"Razão social: {rev.razao_social}")
+            print(f"Contato: {rev.contato}")
 
 
 if __name__ == "__main__":
     # select_aditivos_nutritivos()
-    select_sabor()
+    # select_sabor()
+    select_revendedor()
     
