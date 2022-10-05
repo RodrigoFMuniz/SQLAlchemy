@@ -1,3 +1,4 @@
+from types import NoneType
 from typing import List
 from sqlalchemy import func
 from conf.helpers import formata_data
@@ -79,11 +80,21 @@ def select_tipo_picole()->None:
 
 def select_sabor_filtrado(id_sabor: int) ->None:
     with create_session() as session:
-        sabor_first: md.Sabor = session.query(md.Sabor).filter(md.Sabor.id == id_sabor).first()
-
-        print(f"Sabor filtrado ID: {sabor_first.id}")
-        print(f"Sabor filtrado Nome: {sabor_first.nome}")
-        print(f"Sabor filtrado Data: {formata_data(sabor_first.data_criacao)}")
+        #forma 1
+        # sabor_first: md.Sabor = session.query(md.Sabor).filter(md.Sabor.id == id_sabor).first()
+        #forma 2
+        sabor_first: md.Sabor = session.query(md.Sabor).filter(md.Sabor.id == id_sabor).one_or_none()
+        
+        if sabor_first != None:
+            print(f"Sabor filtrado ID: {sabor_first.id}")
+            print(f"Sabor filtrado Nome: {sabor_first.nome}")
+            print(f"Sabor filtrado Data: {formata_data(sabor_first.data_criacao)}")
+            
+        else:
+            print('Erro')
+            
+             
+    
         
 
 if __name__ == "__main__":
@@ -94,5 +105,5 @@ if __name__ == "__main__":
     # select_conservante()
     # select_tipo_embalagem()
     # select_tipo_picole()
-    select_sabor_filtrado(id_sabor=23)
+    select_sabor_filtrado(id_sabor=223)
     
