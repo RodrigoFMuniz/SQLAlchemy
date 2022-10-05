@@ -17,10 +17,18 @@ def select_aditivos_nutritivos()->None:
             print(f"Nome: {an.nome}")
             print(f"Fórmula química: {an.formula_quimica}")
 
+def select_sabor()->None:
+    with create_session() as session:
+        sabor:List[md.Sabor] = session.query(md.Sabor)
 
+        for sa in sabor:
+            print(f"ID: {sa.id}")
+            print(f"Data: {formata_data(sa.data_criacao)}")
+            print(f"Nome: {sa.nome}")
             
 
 
 if __name__ == "__main__":
-    select_aditivos_nutritivos()
+    # select_aditivos_nutritivos()
+    select_sabor()
     
