@@ -64,6 +64,17 @@ def select_tipo_embalagem()->None:
             print(f"ID: {tp.id}")
             print(f"Data: {formata_data(tp.data_criacao)}")
             print(f"Nome: {tp.nome}")
+
+def select_tipo_picole()->None:
+    with create_session() as session:
+
+        tipo_picole: List[md.TipoPicole] = session.query(md.TipoPicole)
+
+        for tp in tipo_picole:
+            print(f"ID: {tp.id}")
+            print(f"Data: {formata_data(tp.data_criacao)}")
+            print(f"Nome: {tp.nome}")
+
         
 
 if __name__ == "__main__":
@@ -72,5 +83,7 @@ if __name__ == "__main__":
     # select_revendedor()
     # select_ingrediente()
     # select_conservante()
-    select_tipo_embalagem()
+    # select_tipo_embalagem()
+    select_tipo_picole()
+
     
