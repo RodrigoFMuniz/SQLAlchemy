@@ -84,9 +84,11 @@ def select_sabor_filtrado(id_sabor: int) ->None:
         #forma 1
         # sabor_first: md.Sabor = session.query(md.Sabor).filter(md.Sabor.id == id_sabor).first()
         #forma 2
-        sabor_first: md.Sabor = session.query(md.Sabor).filter(md.Sabor.id == id_sabor).one_or_none()
+        # sabor_first: md.Sabor = session.query(md.Sabor).filter(md.Sabor.id == id_sabor).one_or_none()
         # Forma 3
         # sabor_first: md.Sabor = session.query(md.Sabor).filter(md.Sabor.id == id_sabor).one()
+        # Forma 4: Usando whery ao invés de filter, com os métodos auxiliares first(), one_or_none) e one().
+        sabor_first: md.Sabor = session.query(md.Sabor).where(md.Sabor.id == id_sabor).first()
 
 
         if sabor_first:
@@ -95,8 +97,8 @@ def select_sabor_filtrado(id_sabor: int) ->None:
             print(f"Sabor filtrado Data: {formata_data(sabor_first.data_criacao)}")
         
         else:
-            # raise Exception('Error de tipo')
-            print('Error de tipo')
+            raise Exception('Error de tipo')
+            # print('Error de tipo')
 
              
     
@@ -110,5 +112,5 @@ if __name__ == "__main__":
     # select_conservante()
     # select_tipo_embalagem()
     # select_tipo_picole()
-    select_sabor_filtrado(id_sabor=223)
+    select_sabor_filtrado(id_sabor=23)
     
