@@ -55,6 +55,15 @@ def select_conservante()->None:
             print(f"Data: {formata_data(c.data_criacao)}")
             print(f"Nome: {c.nome}")
             print(f"Descrição: {c.descricao}")
+
+def select_tipo_embalagem()->None:
+    with create_session() as session:
+        tipo_embalagem: List[md.TipoEmbalagem] = session.query(md.TipoEmbalagem)
+
+        for tp in tipo_embalagem:
+            print(f"ID: {tp.id}")
+            print(f"Data: {formata_data(tp.data_criacao)}")
+            print(f"Nome: {tp.nome}")
         
 
 if __name__ == "__main__":
@@ -62,5 +71,6 @@ if __name__ == "__main__":
     # select_sabor()
     # select_revendedor()
     # select_ingrediente()
-    select_conservante()
+    # select_conservante()
+    select_tipo_embalagem()
     
