@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from configs.base import BASE
 
 class DBConnectionHandler:
 
@@ -9,7 +10,7 @@ class DBConnectionHandler:
         self.session = None
     
     def __create_database_engine(self):
-        engine = create_engine(self.__connection_string, echo=False, connect_args={"check_same_thread":False})
+        engine = create_engine(self.__connection_string, echo=True, connect_args={"check_same_thread":False})
         return engine
 
     def get_engine(self):
@@ -22,3 +23,7 @@ class DBConnectionHandler:
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.session.close()
+    
+    def create_table(self):
+        engine = self.get_engine()
+        BASE.metadata.create_all(engine)
