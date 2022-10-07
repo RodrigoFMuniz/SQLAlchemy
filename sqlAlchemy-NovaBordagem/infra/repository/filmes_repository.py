@@ -10,17 +10,20 @@ class FilmeRepository:
     
     def create(self, filme: Filme):
         with DBConnectionHandler() as db:
-            db.session.add(filme)
+            data = db.session.add(filme)
+            print(f"Create: {data}")
             db.session.commit()
     
-    def update(self, filme_id: int):
+    def update(self, filme_id: int, coluna, val_atualizado):
         with DBConnectionHandler() as db:
-            db.session.query(Filme).filter(Filme.id == filme_id).update({"ano":2020})
+            data = db.session.query(Filme).filter(Filme.id == filme_id).update({coluna: val_atualizado})
+            print(f"Update: {data}")
             db.session.commit()
     
     def delete(self, filme_id:int):
         with DBConnectionHandler() as db:
-            db.session.query(Filme).filter(Filme.id == filme_id).delete()
+            data = db.session.query(Filme).filter(Filme.id == filme_id).delete()
+            print(f"Delete: {data}")
             db.session.commit()
     
         
