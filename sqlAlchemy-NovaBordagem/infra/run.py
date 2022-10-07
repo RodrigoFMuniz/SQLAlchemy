@@ -15,7 +15,7 @@ repo = FilmeRepository()
 
 # repo.create(filme_1)
 
-repo.update(4,"genero","Ação")
+repo.update(1,"genero","Drama")
 # repo.delete(6)
 
 # repo_3 = FilmeRepository()

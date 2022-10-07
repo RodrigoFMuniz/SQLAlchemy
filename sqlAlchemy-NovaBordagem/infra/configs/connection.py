@@ -9,7 +9,7 @@ class DBConnectionHandler:
         self.session = None
     
     def __create_database_engine(self):
-        engine = create_engine(self.__connection_string)
+        engine = create_engine(self.__connection_string, echo=False, connect_args={"check_same_thread":False})
         return engine
 
     def get_engine(self):
@@ -19,6 +19,6 @@ class DBConnectionHandler:
         session_make = sessionmaker(bind=self.__engine)
         self.session = session_make()
         return self
-        
+
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.session.close()
