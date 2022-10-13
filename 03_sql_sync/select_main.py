@@ -133,6 +133,15 @@ def select_complexo_sabor()->None:
             print(f"Data: {formata_data(sabor.data_criacao)}")
             print(f"Sabor: {sabor.nome}")
         
+def select_complexo_sabor_limit()->None:
+    with create_session() as session:
+        sabores: List[md.Sabor] = session.query(md.Sabor).order_by(md.Sabor.data_criacao.desc()).limit(25)
+
+        for sabor in sabores:
+            print(f"ID: {sabor.id}")
+            print(f"Data: {formata_data(sabor.data_criacao)}")
+            print(f"Sabor: {sabor.nome}")
+        
      
 if __name__ == "__main__":
     # select_aditivos_nutritivos()
@@ -144,5 +153,5 @@ if __name__ == "__main__":
     # select_tipo_picole()
     # select_sabor_filtrado(id_sabor=23)
     # select_complexo_picole()
-    select_complexo_sabor()
+    select_complexo_sabor_limit()
     
