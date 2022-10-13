@@ -100,6 +100,34 @@ def select_sabor_filtrado(id_sabor: int) ->None:
             raise Exception('Error de tipo')
             # print('Error de tipo')
 
+
+# Tipos complexos
+
+def select_complexo_picole()->None:
+    with create_session() as session:
+        picoles:List[md.Picole] = session.query(md.Picole).all()
+        
+        for picole in picoles:
+            print(f"ID: {picole.id}")
+            print(f"Data: {formata_data(picole.data_criacao)}")
+            print(f"Preço: {picole.preco}")
+            print(f"Sabor: {picole.sabor.nome}")
+            print(f"Tipo de embalagem: {picole.tipos_embalagem.nome}")
+            print(f"Tipo de picole: {picole.tipos_picole.nome}")
+            print("Ingredientes")
+            for ingrediente in picole.ingredientes:
+                print(f"\tIngrediente: {ingrediente.nome}")
+            print("Conservantes")
+            for conservante in picole.conservantes:
+                print(f"\tConservante: {conservante.nome}")
+            print("Aditivos Nutritivos")
+            for ad in picole.aditivo_nutritivo:
+                print(f"\tAditivo: {ad.formula_quimica}")
+                
+            
+
+
+
              
     
         
@@ -112,5 +140,6 @@ if __name__ == "__main__":
     # select_conservante()
     # select_tipo_embalagem()
     # select_tipo_picole()
-    select_sabor_filtrado(id_sabor=23)
+    # select_sabor_filtrado(id_sabor=23)
+    select_complexo_picole()
     

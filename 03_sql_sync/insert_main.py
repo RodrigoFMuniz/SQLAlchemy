@@ -1,5 +1,3 @@
-from pydoc import describe
-from xml.dom.minidom import Notation
 from conf.db_session import create_session
 
 from models.aditivo_nutritivo import AditivoNutritivo
@@ -29,7 +27,7 @@ def insert_aditivo_nutritivo()->AditivoNutritivo:
     print(f"ID:{an.id}")
     print(f"Data de criação:{an.data_criacao}")
     print(f"Nome:{an.nome}")
-    print(f"Formula química:{an.formula_quimica}")
+    print(f"Formula química:{an.nome}")
 
     return an
 

@@ -55,8 +55,10 @@ def create_engine(sqlite:bool = False)-> Engine:
 
 def create_session() -> Session:
   global __engine
+  # print(__engine)
   if not __engine:
     create_engine(sqlite=True)
+    # print(__engine)
   __session = sessionmaker(__engine, expire_on_commit=False, class_=Session)
 
   session: Session = __session()
