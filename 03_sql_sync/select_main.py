@@ -126,7 +126,7 @@ def select_complexo_picole()->None:
                 
 def select_complexo_sabor()->None:
     with create_session() as session:
-        sabores: List[md.Sabor] = session.query(md.Sabor).order_by(md.Sabor.data_criacao.desc()).all()
+        sabores: List[md.Sabor] = session.query(md.Sabor).order_by(md.Sabor.data_criacao.desc(), md.Sabor.nome).all()
 
         for sabor in sabores:
             print(f"ID: {sabor.id}")
