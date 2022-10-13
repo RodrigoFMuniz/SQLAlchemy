@@ -124,6 +124,16 @@ def select_complexo_picole()->None:
             for ad in picole.aditivo_nutritivo:
                 print(f"\tAditivo: {ad.formula_quimica}")
                 
+def select_complexo_sabor()->None:
+    with create_session() as session:
+        sabores: List[md.Sabor] = session.query(md.Sabor).order_by(md.Sabor.data_criacao.desc()).all()
+
+        for sabor in sabores:
+            print(f"ID: {sabor.id}")
+            print(f"Data: {formata_data(sabor.data_criacao)}")
+            print(f"Preço: {sabor.nome}")
+        
+
             
 
 
@@ -141,5 +151,6 @@ if __name__ == "__main__":
     # select_tipo_embalagem()
     # select_tipo_picole()
     # select_sabor_filtrado(id_sabor=23)
-    select_complexo_picole()
+    # select_complexo_picole()
+    select_complexo_sabor()
     
