@@ -156,6 +156,8 @@ def select_agregation()->None:
             func.max(md.Picole.preco).label('mais_caro')
         ).all()
 
+        print(f"Resultado: {resultado}")
+
         print(
             f"Resultado da soma: {resultado[0][0]}\n"
             f"Resultado da media: {resultado[0][1]}\n"
