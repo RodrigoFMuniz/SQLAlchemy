@@ -27,3 +27,8 @@ class DBConnectionHandler:
     def create_table(self):
         engine = self.get_engine()
         BASE.metadata.create_all(engine)
+    
+    def reset_tables(self):
+        engine = self.get_engine()
+        BASE.metadata.drop_all()
+        BASE.metadata.create_all()
