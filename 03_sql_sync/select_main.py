@@ -131,17 +131,9 @@ def select_complexo_sabor()->None:
         for sabor in sabores:
             print(f"ID: {sabor.id}")
             print(f"Data: {formata_data(sabor.data_criacao)}")
-            print(f"Preço: {sabor.nome}")
+            print(f"Sabor: {sabor.nome}")
         
-
-            
-
-
-
-             
-    
-        
-
+     
 if __name__ == "__main__":
     # select_aditivos_nutritivos()
     # select_sabor()
