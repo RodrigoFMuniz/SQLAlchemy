@@ -30,5 +30,5 @@ class DBConnectionHandler:
     
     def reset_tables(self):
         engine = self.get_engine()
-        BASE.metadata.drop_all()
-        BASE.metadata.create_all()
+        BASE.metadata.drop_all(engine)
+        BASE.metadata.create_all(engine)
