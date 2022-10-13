@@ -1,4 +1,3 @@
-from types import NoneType
 from typing import List
 from sqlalchemy import func
 import sqlalchemy as sa
@@ -141,7 +140,13 @@ def select_complexo_sabor_limit()->None:
             print(f"ID: {sabor.id}")
             print(f"Data: {formata_data(sabor.data_criacao)}")
             print(f"Sabor: {sabor.nome}")
-        
+
+def select_complexo_sabor_qtd()->None:
+    with create_session() as session:
+        qtd_sabor: int = session.query(md.Sabor).count()
+
+        print(f"Qtd: {qtd_sabor}")
+  
      
 if __name__ == "__main__":
     # select_aditivos_nutritivos()
@@ -153,5 +158,5 @@ if __name__ == "__main__":
     # select_tipo_picole()
     # select_sabor_filtrado(id_sabor=23)
     # select_complexo_picole()
-    select_complexo_sabor_limit()
+    select_complexo_sabor_qtd()
     
