@@ -146,7 +146,22 @@ def select_complexo_sabor_qtd()->None:
         qtd_sabor: int = session.query(md.Sabor).count()
 
         print(f"Qtd: {qtd_sabor}")
-  
+
+def select_agregation()->None:
+    with create_session() as session:
+        resultado: List = session.query(
+            func.sum(md.Picole.preco).label('soma'),
+            func.avg(md.Picole.preco).label('media'),
+            func.min(md.Picole.preco).label('mais_barato'),
+            func.max(md.Picole.preco).label('mais_caro')
+        ).all()
+
+        print(
+            f"Resultado da soma: {resultado[0][0]}\n"
+            f"Resultado da media: {resultado[0][1]}\n"
+            f"Resultado da min: {resultado[0][2]}\n"
+            f"Resultado da max: {resultado[0][3]}\n"
+        )
      
 if __name__ == "__main__":
     # select_aditivos_nutritivos()
@@ -158,5 +173,6 @@ if __name__ == "__main__":
     # select_tipo_picole()
     # select_sabor_filtrado(id_sabor=23)
     # select_complexo_picole()
-    select_complexo_sabor_qtd()
+    # select_complexo_sabor_qtd()
+    select_agregation()
     
