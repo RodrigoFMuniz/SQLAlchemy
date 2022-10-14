@@ -1,22 +1,33 @@
 from repository.filmes_repository import FilmeRepository
-from repository.atores_repository import AtorRepository
-from repository.locais_repository import LocalRepository
+# from repository.atores_repository import AtorRepository
+# from repository.locais_repository import LocalRepository
+from repository.users_repository import UserRepository
 from entities.filmes import Filme
-from entities.atores import Ator
-from entities.locais import Local
+# from entities.atores import Ator
+# from entities.locais import Local
 from configs.connection import DBConnectionHandler
+from entities.usuarios import User
+
+db = DBConnectionHandler()
+db.create_table()
+
+repo_user = UserRepository()
+
+user1 = User(name="Rodrigoskdjfçaklsdjfçlaksjdfçalksjdfçlaksjdfçlaksjdfçaklsjdfçlaksjdçflaksjdfçlaksjdfçlaksjdfçalskdfjçaslkdfjçasldkfjasçlkdfjasçlkdjfsçaldkfjasçldkfjaçsdlkfjasçldkfjasçdklfjasçdklfjasçldkfjasçldkfjasçdklfjasçdlkfjasdçlkfj", surname="Muniz", cpf="11112221111", password="1111")
+
+repo_user.insert_user(user1)
 
 # with DBConnectionHandler() as conn:
 #     conn.reset_tables()
     
-r_local = LocalRepository()
-r_ator = AtorRepository()
-r_filme = FilmeRepository()
+# r_local = LocalRepository()
+# r_ator = AtorRepository()
+# r_filme = FilmeRepository()
 
 # filme_1 = Filme(nome="A volta dos que não foram", ano=1899, genero="Comédia")
 
 # r_filme.create(filme_1)
-r_filme.update(criteria=2,coluna="ano",val_atualizado=2000)
+# r_filme.update(criteria=2,coluna="ano",val_atualizado=2000)
 
 # data = repo.select()
 # repo_ator.init_tables()
