@@ -1,19 +1,20 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.engine import Engine
 from configs.base import BASE
 
 class DBConnectionHandler:
 
     def __init__(self) -> None:
-        self.__connection_string = f'sqlite:///db/cinema.sqlite'
-        self.__engine = self.__create_database_engine()
+        self.__connection_string: str = f'sqlite:///db/cinema.sqlite'
+        self.__engine: Engine = self.__create_database_engine()
         self.session = None
     
-    def __create_database_engine(self):
+    def __create_database_engine(self) -> Engine:
         engine = create_engine(self.__connection_string, echo=True, connect_args={"check_same_thread":False})
         return engine
 
-    def get_engine(self):
+    def get_engine(self) -> Engine:
         return self.__engine
 
     def __enter__(self):

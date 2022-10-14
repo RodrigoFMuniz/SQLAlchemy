@@ -1,12 +1,25 @@
-# from repository.filmes_repository import FilmeRepository
-# from repository.atores_repository import AtorRepository
+from repository.filmes_repository import FilmeRepository
+from repository.atores_repository import AtorRepository
 from repository.locais_repository import LocalRepository
-# from entities.filmes import Filme
-# # from entities.atores import Ator
-# repo = FilmeRepository()
-repo_ator = LocalRepository()
+from entities.filmes import Filme
+from entities.atores import Ator
+from entities.locais import Local
+from configs.connection import DBConnectionHandler
+
+# with DBConnectionHandler() as conn:
+#     conn.reset_tables()
+    
+r_local = LocalRepository()
+r_ator = AtorRepository()
+r_filme = FilmeRepository()
+
+# filme_1 = Filme(nome="A volta dos que não foram", ano=1899, genero="Comédia")
+
+# r_filme.create(filme_1)
+r_filme.update(criteria=2,coluna="ano",val_atualizado=2000)
+
 # data = repo.select()
-repo_ator.init_tables()
+# repo_ator.init_tables()
 # query_string= f'''
 #     CREATE TABLE atores(
 #     id int NOT NULL,
