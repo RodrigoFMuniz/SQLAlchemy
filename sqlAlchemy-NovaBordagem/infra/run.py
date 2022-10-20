@@ -13,7 +13,7 @@ db.create_table()
 
 repo_user = UserRepository()
 
-user1 = User(name="Rodrigoskdjfçaklsdjfçlaksjdfçalksjdfçlaksjdfçlaksjdfçaklsjdfçlaksjdçflaksjdfçlaksjdfçlaksjdfçalskdfjçaslkdfjçasldkfjasçlkdfjasçlkdjfsçaldkfjasçldkfjaçsdlkfjasçldkfjasçdklfjasçdklfjasçldkfjasçldkfjasçdklfjasçdlkfjasdçlkfj", surname="Muniz", cpf="11112221111", password="1111")
+user1 = User(name="Rodrigo", surname="Muniz", cpf="11112421111", password="1111")
 
 repo_user.insert_user(user1)
 

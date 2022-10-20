@@ -1,3 +1,4 @@
+from ssl import SSLSession
 from typing import List
 from sqlalchemy import func
 import sqlalchemy as sa
@@ -37,6 +38,15 @@ def select_revendedor()->None:
             print(f"CNPJ: {rev.cnpj}")
             print(f"Razão social: {rev.razao_social}")
             print(f"Contato: {rev.contato}")
+
+def select_revendedor_by_id(id_revendedor:int)->md.Revendedor:
+    with create_session() as session:
+        revendedor: md.Revendedor = session.query(md.Revendedor).filter(md.Revendedor.id == id_revendedor).one_or_none()
+
+        if revendedor:
+            return revendedor
+        else:
+            print(f"ID {id_revendedor} não encontrado")
 
 def select_ingrediente()->None:
     with create_session() as session:
@@ -122,6 +132,13 @@ def select_complexo_picole()->None:
             print("Aditivos Nutritivos")
             for ad in picole.aditivo_nutritivo:
                 print(f"\tAditivo: {ad.formula_quimica}")
+
+def select_complexo_picole_by_id(id_picole:int)->None:
+    with create_session() as session:
+        picole:md.Picole | None= session.query(md.Picole).filter(md.Picole.id == id_picole).one_or_none()
+        
+        return picole
+         
                 
 def select_complexo_sabor()->None:
     with create_session() as session:
@@ -164,7 +181,25 @@ def select_agregation()->None:
             f"Resultado da min: {resultado[0][2]}\n"
             f"Resultado da max: {resultado[0][3]}\n"
         )
-     
+
+
+def select_nota_fiscal(id_nf: int)-> md.NotaFiscal:
+    with create_session() as session:
+        nf: md.NotaFiscal = session.query(md.NotaFiscal).filter(md.NotaFiscal.id == id_nf).one_or_none()
+
+        print(f"ID: {nf.id}")
+        print(f"Data: {formata_data(nf.data_criacao)}")
+        print(f"NS: {nf.numero_serie}")
+        print(f"Valor: {nf.valor}")
+        print(f"Descrição: {nf.descricao}")
+        print(f"Revendedor: {nf.revendedor.razao_social}")
+        for l in nf.lotes:
+            print(f"Tipo Picolé{l.tipo_picole}")
+            print(f"Quantidade{l.qtd}")
+        
+        return nf
+
+
 if __name__ == "__main__":
     # select_aditivos_nutritivos()
     # select_sabor()
@@ -176,5 +211,6 @@ if __name__ == "__main__":
     # select_sabor_filtrado(id_sabor=23)
     # select_complexo_picole()
     # select_complexo_sabor_qtd()
-    select_agregation()
+    # select_agregation()
+    select_nota_fiscal(id_nf=40)
     
