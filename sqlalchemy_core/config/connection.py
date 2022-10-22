@@ -1,11 +1,6 @@
-from importlib.metadata import metadata
-from sqlalchemy import Column, create_engine, MetaData, Integer, String, Numeric, ForeignKey, Table
+from sqlalchemy import create_engine
 from pathlib import Path
-from datetime import datetime
-
-from sqlalchemy.dialects.sqlite import JSON
-
-metadata = MetaData()
+from models import *
 
 db_name = f"db/cookies.sqlite"
 
@@ -19,14 +14,4 @@ engine = create_engine(url=conn_str, echo=True)
 
 connection = engine.connect()
 
-# teste de inserção de uma tabela
 
-
-cookie = Table('cookies', metadata, 
-    Column('cookie_id', Integer(), primary_key=True),
-    Column('cookie_name', String(50), index=True),
-    Column('cookie_recipe_url', String(255)),
-    Column('cookie_sku', String(55)),
-    Column('quantity', Integer()),
-    Column('unit_cost', Numeric(12,2))
-)
