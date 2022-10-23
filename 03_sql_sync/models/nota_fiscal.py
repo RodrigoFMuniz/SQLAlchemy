@@ -26,8 +26,8 @@ class NotaFiscal(ModelBase):
   descricao: str = sa.Column(sa.String(200), nullable=False)
 
   #relacionamento 1:1
-  id_revendedor: int = sa.Column(sa.Integer, sa.ForeignKey('revendedores.id'))
-  revendedor: Revendedor = orm.relationship('Revendedor', lazy='joined')
+  id_revendedor: int = sa.Column(sa.Integer, sa.ForeignKey('revendedores.id', ondelete="CASCADE"))
+  revendedor: Revendedor = orm.relationship('Revendedor', lazy='joined', cascade="delete")
 
   # Uma nota fiscal pode ter vários lotes e um lote tem uma nota fiscal
   #relacionamento n:m

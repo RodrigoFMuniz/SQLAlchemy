@@ -45,12 +45,12 @@ if __name__ == "__main__":
 
     # id_rev = select_revendedor_by_id(id_revendedor=2)
 
-    id_rev = select_nota_fiscal(id_nf=1)
+    id_rev = select_revendedor_by_id(id_revendedor=4)
     print(id_rev)
 
     deletar_revendedor(id_revendedor=id_rev.id)
 
-    id_rev = select_nota_fiscal(id_nf=2)
+    id_rev = select_revendedor_by_id(id_revendedor=4)
     print(id_rev)
 
 

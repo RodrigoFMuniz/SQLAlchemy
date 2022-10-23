@@ -212,5 +212,5 @@ if __name__ == "__main__":
     # select_complexo_picole()
     # select_complexo_sabor_qtd()
     # select_agregation()
-    select_nota_fiscal(id_nf=40)
+    select_nota_fiscal(id_nf=3)
     
