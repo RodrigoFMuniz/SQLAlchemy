@@ -9,13 +9,14 @@ from configs.connection import DBConnectionHandler
 from entities.usuarios import User
 
 db = DBConnectionHandler()
-db.create_table()
+# db.create_table()
+db.delete_tables()
 
-repo_user = UserRepository()
+# repo_user = UserRepository()
 
-user1 = User(name="Rodrigo", surname="Muniz", cpf="11112421111", password="1111")
+# user1 = User(name="Rodrigo", surname="Muniz", cpf="11112421111", password="1111")
 
-repo_user.insert_user(user1)
+# repo_user.insert_user(user1)
 
 # with DBConnectionHandler() as conn:
 #     conn.reset_tables()
