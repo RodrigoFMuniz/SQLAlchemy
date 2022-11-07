@@ -42,6 +42,8 @@ def create_engine(sqlite:bool = False)-> Engine:
   else:
     conn_str = "postgreesql://user_postgre_db:password@localhost:port_db/bd_name"
     __engine = sa.create_engine(url=conn_str, echo=False)
+
+  print(__engine)
   
   return __engine
 

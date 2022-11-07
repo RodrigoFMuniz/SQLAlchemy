@@ -11,8 +11,8 @@ import models.__all_models as md
 
 def select_aditivos_nutritivos()->None:
     with create_session() as session:
-        aditivos_nutritivos:List[md.AditivoNutritivo] = session.query(md.AditivoNutritivo)
-
+        aditivos_nutritivos:List[md.AditivoNutritivo] = session.query(md.AditivoNutritivo).limit(5)
+        
         for an in aditivos_nutritivos:
             print(f"ID: {an.id}")
             print(f"Data: {formata_data(an.data_criacao)}")
@@ -50,8 +50,8 @@ def select_revendedor_by_id(id_revendedor:int)->md.Revendedor:
 
 def select_ingrediente()->None:
     with create_session() as session:
-        ingrediente: List[md.Ingrediente] = session.query(md.Ingrediente)
-
+        ingrediente: List[md.Ingrediente] = session.query(md.Ingrediente).limit(10)
+    
         for ing in ingrediente:
             print(f"ID: {ing.id}")
             print(f"Data: {formata_data(ing.data_criacao)}")
@@ -204,7 +204,7 @@ if __name__ == "__main__":
     # select_aditivos_nutritivos()
     # select_sabor()
     # select_revendedor()
-    # select_ingrediente()
+    select_ingrediente()
     # select_conservante()
     # select_tipo_embalagem()
     # select_tipo_picole()
@@ -212,5 +212,5 @@ if __name__ == "__main__":
     # select_complexo_picole()
     # select_complexo_sabor_qtd()
     # select_agregation()
-    select_nota_fiscal(id_nf=3)
+    # select_nota_fiscal(id_nf=3)
     
