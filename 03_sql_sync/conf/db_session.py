@@ -42,6 +42,8 @@ def create_engine(sqlite:bool = False)-> Engine:
   else:
     conn_str = "postgreesql://user_postgre_db:password@localhost:port_db/bd_name"
     __engine = sa.create_engine(url=conn_str, echo=False)
+
+  print(__engine)
   
   return __engine
 
@@ -53,17 +55,20 @@ def create_engine(sqlite:bool = False)-> Engine:
   class_=Session: Classe usada para definir o modelo de classe para criar uma nova sessão/conexão
   '''
 
-def create_session()-> Session:
+def create_session() -> Session:
   global __engine
+  # print(__engine)
   if not __engine:
     create_engine(sqlite=True)
+    # print(__engine)
   __session = sessionmaker(__engine, expire_on_commit=False, class_=Session)
 
-  session: Session = __session
+  session: Session = __session()
   return session
 
 '''
 Cria as tabelas no banco de dados
+_all_models: usado para importar todas as tabelas cridas
 '''
 
 def create_tables()->None:
